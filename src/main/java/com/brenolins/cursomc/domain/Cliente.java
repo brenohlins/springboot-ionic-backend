@@ -18,10 +18,13 @@ import com.brenolins.cursomc.domain.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode
-
+@Getter
+@Setter
 @Entity
 public class Cliente implements Serializable {
 
@@ -46,6 +49,9 @@ public class Cliente implements Serializable {
 	@ElementCollection
 	@CollectionTable(name="telefone")
 	private Set<String> telefones = new HashSet<>();
+	@OneToMany(mappedBy = "cliente")
+	
+	private List<Pedido>pedidos = new ArrayList<>();
 
 	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
 		super();
