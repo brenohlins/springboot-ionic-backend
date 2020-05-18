@@ -15,12 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.brenolins.cursomc.domain.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 @NoArgsConstructor
 @EqualsAndHashCode
 @Getter
@@ -32,26 +34,27 @@ public class Cliente implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String nome;
 	private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
-	
+
 	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
-	private List<Endereco>enderecos = new ArrayList<>();
-	
+	private List<Endereco> enderecos = new ArrayList<>();
+
 	@ElementCollection
-	@CollectionTable(name="telefone")
+	@CollectionTable(name = "telefone")
 	private Set<String> telefones = new HashSet<>();
+
+	@JsonBackReference
 	@OneToMany(mappedBy = "cliente")
-	
-	private List<Pedido>pedidos = new ArrayList<>();
+	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
 		super();
@@ -117,8 +120,5 @@ public class Cliente implements Serializable {
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
-	
-	
-	
-	
+
 }

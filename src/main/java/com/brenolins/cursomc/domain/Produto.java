@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,49 +29,44 @@ import lombok.ToString;
 @ToString
 
 @Entity
-public class Produto implements Serializable{
+public class Produto implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private double preco;
-	
+
 	@JsonBackReference
 	@ManyToMany
-	@JoinTable(name = "PROD_CAT",
-	joinColumns = @JoinColumn(name = "produto_id"),
-	inverseJoinColumns = @JoinColumn(name = "categoria_id")
-			)
-	
+	@JoinTable(name = "PROD_CAT", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+
 	private List<Categoria> categorias = new ArrayList<>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemPedido> itens = new HashSet<>();
-	
-	public List<Pedido> getPedidos(){
+
+	@JsonIgnore
+	public List<Pedido> getPedidos() {
 		List<Pedido> lista = new ArrayList<>();
-		for(ItemPedido x : itens) {
+		for (ItemPedido x : itens) {
 			lista.add(x.getPedido());
 		}
-			return lista;
-		}
-	
-	
-	
+		return lista;
+	}
+
 	public Produto(Integer id, String nome, double preco) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -79,8 +75,6 @@ public class Produto implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -98,6 +92,5 @@ public class Produto implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
 }
