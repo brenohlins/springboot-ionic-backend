@@ -16,8 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,11 +37,11 @@ public class Pedido implements Serializable {
 	private Integer id;
 	private Date instante;
 
-	@JsonManagedReference
+	
 	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "pedido")
 	private Pagamento pagamento;
 
-	@JsonManagedReference
+	
 	@ManyToOne
 	@JoinColumn(name = "cliente_pedido_id")
 	private Cliente cliente;
