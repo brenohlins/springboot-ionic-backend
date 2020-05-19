@@ -60,7 +60,7 @@ public class CursomcApplication implements CommandLineRunner {
 
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
 	}
@@ -69,6 +69,10 @@ public class CursomcApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Categoria cat1 = new Categoria(null, "Info");
 		Categoria cat2 = new Categoria(null, "Escritorio");
+		Categoria cat3 = new Categoria(null, "Mesa");
+		Categoria cat4 = new Categoria(null, "Cadeiras");
+		Categoria cat5 = new Categoria(null, "Armarios");
+
 		Produto p1 = new Produto(null, "Computador", 2220.00);
 		Produto p2 = new Produto(null, "Impressora", 820.00);
 		Produto p3 = new Produto(null, "Mouse", 80.0);
@@ -80,7 +84,7 @@ public class CursomcApplication implements CommandLineRunner {
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
 		p3.getCategorias().addAll(Arrays.asList(cat1));
 
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 
 		Estado est1 = new Estado(null, "Pernambuco");
@@ -113,17 +117,15 @@ public class CursomcApplication implements CommandLineRunner {
 		Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 19:35"), cli1, e2);
 
 		Pedido ped3 = new Pedido(null, sdf.parse("30/10/2001 19:00"), cli1, e2);
-		
-		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2,ped3));
+
+		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2, ped3));
 
 		Pagamento pag1 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2017 00:01"),
 				sdf.parse("12/10/2011 00:02"));
 		ped1.setPagamento(pag1);
 
-		
 		Pagamento pag2 = new PagamentoComCartao(null, EstadoPagamento.CANCELADO, ped1, 6);
 		ped2.setPagamento(pag2);
-		
 
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 
@@ -133,15 +135,15 @@ public class CursomcApplication implements CommandLineRunner {
 		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.0, 2000.00, 1);
 		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 80.00, 2);
 		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.0, 800.0, 1);
-		
-		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
 		ped2.getItens().addAll(Arrays.asList(ip3));
-		
+
 		p1.getItens().addAll(Arrays.asList(ip1));
 		p2.getItens().addAll(Arrays.asList(ip3));
 		p3.getItens().addAll(Arrays.asList(ip2));
-		
-		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
+
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 
 	}
 
