@@ -31,13 +31,12 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService service;
 
-	@GetMapping(value="/{id}")
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 
 		Categoria obj = service.find(id);
 		return ResponseEntity.ok(obj);
 	}
-
 
 	@PostMapping
 	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
@@ -72,7 +71,7 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 
-	@GetMapping(value="/page")
+	@GetMapping(value = "/page")
 	public ResponseEntity<Page<CategoriaDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
