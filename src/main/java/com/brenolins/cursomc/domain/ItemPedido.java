@@ -29,15 +29,15 @@ public class ItemPedido implements Serializable
 	private ItemPedidoPK id = new ItemPedidoPK();
 
 	private double desconto;
-	private double preço;
+	private double preco;
 	private Integer quantidade;
 
-	public ItemPedido(Pedido pedido, Produto produto, double desconto, double preço, int quantidade) {
+	public ItemPedido(Pedido pedido, Produto produto, double desconto, double preco, int quantidade) {
 		super();
 		id.setPedido(pedido);
 		id.setProduto(produto);
 		this.desconto = desconto;
-		this.preço = preço;
+		this.preco = preco;
 		this.quantidade = quantidade;
 	}
 
