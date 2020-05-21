@@ -9,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.brenolins.cursomc.domain.Cliente;
+import com.brenolins.cursomc.service.validations.ClienteUpdate;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@ClienteUpdate
 
 public class ClienteDTO implements Serializable {
 
