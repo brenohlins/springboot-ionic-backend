@@ -13,7 +13,7 @@ import com.brenolins.cursomc.service.exceptions.ObjectNotFoundException;
 public class PedidoService {
 	
 	@Autowired 
-	PedidoRepository pedidoRepository;
+	private PedidoRepository pedidoRepository;
 	
 	public Pedido find(Integer id) {
 		Optional<Pedido> obj = pedidoRepository.findById(id);
