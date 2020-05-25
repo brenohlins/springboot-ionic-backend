@@ -1,5 +1,4 @@
-{"properties": [{
-  "name": "exclude",
-  "type": "java.lang.String",
-  "description": "A description for 'exclude'"
-}]}
+ mysql://b036ae2cb37998:5a74c21c@us-cdbr-east-06.cleardb.net/heroku_f1e8a9cad8576d4?reconnect=true
+
+ mysql --host=us-cdbr-east-06.cleardb.net --user=b036ae2cb37998 --password=5a74c21c
+--reconnectheroku_f1e8a9cad8576d4 < arquivo.sql
