@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Profile;
 import com.brenolins.cursomc.service.DBService;
 
 @Configuration
-@Profile("test")
+@Profile("dev")
 public class DevConfig {
 
 	
